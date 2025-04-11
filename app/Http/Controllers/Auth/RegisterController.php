@@ -17,10 +17,9 @@ class RegisterController extends Controller
     {
    
         $request->validate([
-            'name' => 'required|string|min:4|max:60',
+            'name' => 'required|string|max:60|min:4',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:5|max:10',
-            'role' => 'in:pemain,admin'
         ]);
 
         $user = User::create([
@@ -29,8 +28,11 @@ class RegisterController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        $role = $request->role ?? 'pemain';
+
+        $role = $request->role ?? 'user';
         $user->assignRole($role);
+
+
 
         $token = $user->createToken('apiauth')->plainTextToken;
         return response()->json([
