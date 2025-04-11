@@ -14,14 +14,12 @@ class RegisterController extends Controller
     public function __invoke(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|min:4|max:60',
-            'email' => 'required|email|unique:users,email',
+            'username' => 'required|username|unique:users,username',
             'password' => 'required|min:5|max:10',
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
+        $user = User::create(attributes: [
+            'username' => $request->username,
             'password' => bcrypt($request->password),
         ]);
 
