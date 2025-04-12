@@ -29,14 +29,15 @@ class RegisterController extends Controller
         ]);
 
 
-        $role = $request->role ?? 'user';
-        $user->assignRole($role);
+
+        $user->assignRole('pemain');
 
 
 
         $token = $user->createToken('apiauth')->plainTextToken;
         return response()->json([
             'user' => $user,
+            'message' => 'Berhasil register',
             'token' => $token
         ]);
     }

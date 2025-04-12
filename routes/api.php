@@ -18,6 +18,8 @@ Route::post('/v1/auth/signin', LoginController::class);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/v1/auth/signout', LogoutController::class);
+    Route::get('/admin', [AdminController::class, 'cekadmin']);
+    Route::get('/pengguna', [AdminController::class, 'cekpemain']);
 });
 
 
