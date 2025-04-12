@@ -56,7 +56,8 @@ class UsersResource extends Resource
             ->columns([
                 TextColumn::make('name'),
                 TextColumn::make('email'),
-                TextColumn::make('role'),
+                TextColumn::make('roles.0.name')->label('Role')->badge()->sortable(),
+                TextColumn::make('created_at')->label('Tanggal')->dateTime(),
 
             ])
             ->filters([
