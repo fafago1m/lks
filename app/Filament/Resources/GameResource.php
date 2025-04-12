@@ -6,11 +6,13 @@ use App\Filament\Resources\GameResource\Pages;
 use App\Filament\Resources\GameResource\RelationManagers;
 use App\Models\Game;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,7 +23,7 @@ class GameResource extends Resource
 {
     protected static ?string $model = Game::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-puzzle-piece';
     protected static ?string $navigationGroup = 'Manajemen Game'; 
 
     public static function form(Form $form): Form
@@ -35,7 +37,7 @@ class GameResource extends Resource
                     ->live()
                     ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
 
-                TextInput::make('slug')
+                TextInput::make(name: 'slug')
                     ->label('Slug')
                     ->disabled()
                     ->dehydrated()
@@ -44,6 +46,11 @@ class GameResource extends Resource
                 Textarea::make('description')
                     ->label('Deskripsi')
                     ->maxLength(200),
+
+                    FileUpload::make('thumbnail') 
+                    ->label('foto')
+                    ->directory('/foto')
+                    ->required(),
             ]);
     }
 
@@ -67,6 +74,8 @@ class GameResource extends Resource
                 TextColumn::make('updated_at')
                     ->label('Diperbarui')
                     ->since(), 
+               
+
             ])
             ->filters([
                 //

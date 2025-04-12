@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class GameVersion extends Model
 {
-    protected $fillable = ['game_id', 'version', 'storage_path'];
+    protected $fillable = [
+        'game_id',
+        'version',
+        'storage_path'
+    ];
 
     public function game()
     {

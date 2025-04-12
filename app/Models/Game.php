@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Game extends Model
 {
-    protected $fillable = ['title', 'slug', 'description', 'created_by'];
+    protected $fillable = [
+        'title',
+        'slug',
+        'description',
+        'thumbnail',
+    ];
 
     public function author()
     {
